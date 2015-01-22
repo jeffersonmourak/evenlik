@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+	<header class='admin-header'>
+		<h1>Página inicial</h1>
+	</header>
+	<article class="admin-article">
+		<h1>Seja bem vindo {{user}} (<a href="/admin/logout/" class='link'>Sair</a>)</h1>
+		<section class="subscribers">
+			<ul>
+				{% for i in subscribers %}
+					<li>{% if Checkin%} <a href="/confirm/{{i.id}}"><span class="checkin"> </span>{{i.name}}</a> {% else %} {{i.name}} {% endif %} </li>
+				{% empty %}
+					<li>Ninguem cadastrado</li>
+				{% endfor %}
+			</ul>
+		</section>
+		<nav class="sideNav">
+			<ul>
+				<li><a href="/">Ver Site</a></li>
+				<li><a href="{% if Checkin%} /admin/ {% else %} /admin/checkin/ {% endif %}">{% if Checkin%} Voltar {% else %} Checkin {% endif %}</a></li>
+				<li><a href="/admin/editor/">Editar informações</a></li>
+				<li><a href="/admin/mail/">Enviar Email</a></li>
+			</ul>
+		</nav>
+	</article>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block body %}
+	<header class='admin-header'>
+		<h1>Entre no sistema de administração</h1>
+	</header>
+	<article class="admin-article">
+		<section class="login">
+			<form action="." method="post">{% csrf_token %}
+				
+				<input type="text" name="username" placeholder="Nome de usuário"><br>
+				<input type="password" name="passwd" placeholder="Senha"><br>
+				<input type="submit" name='submit' value="login"><br>
+				{{msgError}}
+			</form>
+		</section>
+	</article>
+	
+{% endblock %}

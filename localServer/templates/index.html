@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+	<h1>{{event_name}}</h1>
+	{% if Speaker %}
+		<span>Palestrantes</span><br>
+		{% for x in list_speaker %}
+			{{x}} <br>
+		{% empty %}
+			
+		{% endfor %}
+	{% endif %}
+	{% if Painelist %}
+		<span>Painelistas</span><br>
+		{% for i in list_painelist %}
+			{{i}} <br>
+		{% empty %}
+			
+		{% endfor %}
+	{% endif %}
+
+	<form action="." method="post">{% csrf_token %}
+		<input type="text" name="nome">
+		<input type="text" name="email">
+		<input type="submit" name='submit' value="enviar">
+	</form>
+{% endblock %}

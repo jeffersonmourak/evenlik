@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block body%}
+	<script src="/media/js/editor.js"></script>
+{% load set_var %}
+	<header class='admin-header'>
+		<h1>Editar Informações do evento</h1>
+	</header>
+	<article class="admin-article">
+		<h1>Informações do evento</h1>
+		<section class="subscribers hide-scroll">
+			<form action="." method="post">
+				{% csrf_token %}
+				<h3>Configuraçõe do evento</h3>
+				<label>
+					<input type="checkbox" name='time' {{Time}}>
+					<span class='label-text'>Horário</span>
+				</label><br>
+				<label>
+					<input type="checkbox" name='speaker' {{Speaker}}>
+					<span class='label-text'>Palestrante</span>
+				</label><br>
+				<label>
+					<input type="checkbox" name='painelist' {{Painelist}}>
+					<span class='label-text'>Painelista</span>
+				</label><br>
+				<input type="submit" name='save_config' value='Salvar configurações'>
+			</form>
+			<form action="." method="post">
+				{% csrf_token %}
+				<h3>Informações do evento</h3>
+				{{messages.msg}} <br>
+				<span>Nome do evento</span><br>
+				<input type="text" name='event_name' placeholder="Nome do Evento" value='{{event_name}}'> <br>
+				<span>Numero de dias do evento</span><br>
+				<input type="number" id="days" name='days' placeholder="Numero de dias do evento" value="{{days}}"> <br>
+				<br>
+				<span><a href="#" id="open-time" class='link'>Editar os horários</a></span>
+				<br><br>
+
+				<span>Palestrantes (<a href="#" id='addSpeaker' class='link'> Adicionar um palestrante </a>)</span><br>
+				<div class="speakers">
+					{% for x in list_speaker %}
+						<input type="text" name='speaker[]' placeholder="palestrante" value="{{x}}"> <br>
+					{% empty %}
+						<span>Nenhum Palestrante adicionado</span><br>
+					{% endfor %}
+				</div>
+				<span>Painelistas (<a href="#" id='addPainelist' class='link'> Adicionar um Painelista </a>)</span><br>
+				<div class="painelists">
+					{% for i in list_painelist %}
+					<input type="text" name='painelist[]' value='{{i}}' placeholder="painelista"> <br>
+					{% empty %}
+						<span>Nenhum Painelista adicionado</span><br>
+					{% endfor %}
+				</div>
+				
+				{% for z in time %}
+					{% set loopP  = forloop.counter0 %}
+					{% for key,value in z %}
+						<input type="text" name="time[{{loopP}}]" value="{{key}}">
+					{% endfor %}
+
+				{% empty %}
+					<span>Horarios não programados</span><br>
+				{% endfor %}
+
+				<input type="submit" name='save_event' value='Salvar'>
+			</form>
+			<br>
+		</section>
+		<section class="block">
+			<div class="centered">
+		        <form action="." method="post">
+		        	{% csrf_token %}
+					<h3>Editar os horarios (<a href="#" id='time-close' class='link'>Fechar</a>)</h3>
+		        	<div class="values">
+		        		{% for z in time %}
+							{% set loopP  = forloop.counter0 %}
+							{% for key,value in z %}
+								<input type="text" name="time[{{loopP}}]" value="{{key}}">
+							{% endfor %}
+
+						{% empty %}
+							<script>
+								var notTime = false;
+							</script>
+						{% endfor %}
+		        	</div>
+		        	<input type="submit" name='save_time' value='Salvar'>
+		        </form>
+		    </div>
+		</section>
+		<nav class="sideNav">
+			<ul>
+				<li><a href="/">Ver Site</a></li>
+				<li><a href="/admin/checkin/">Checkin</a></li>
+				<li><a href="/admin/">Voltar</a></li>
+				<li><a href="/admin/mail/">Enviar Email</a></li>
+			</ul>
+		</nav>
+	</article>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+	{% load set_var %}
+	<header class='admin-header'>
+		<h1>Enviar um email promocional</h1>
+	</header>
+	<article class="admin-article">
+		<h1>Informações do email</h1>
+		<section class="subscribers hide-scroll">
+			<form action="." method="post">
+				{% csrf_token %}
+				<input type="text" name='subject' placeholder="Assunto"><br>
+				<textarea name="message" id="" cols="30" rows="10" placeholder="Texto"></textarea><br>
+				<input type="submit" name='send' value='Enviar'>
+			</form>
+		</section>
+		<nav class="sideNav">
+			<ul>
+				<li><a href="/">Ver Site</a></li>
+				<li><a href="/admin/checkin/">Checkin</a></li>
+				<li><a href="/admin/editor/">Editar informações</a></li>
+				<li><a href="/admin/">Voltar</a></li>
+			</ul>
+		</nav>
+	</article>
+{% endblock %}
