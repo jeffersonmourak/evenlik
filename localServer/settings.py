@@ -15,9 +15,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-EMAIL_HOST = 'mx1.hostinger.com.br'
-EMAIL_HOST_USER = 'contato@jeffersonmourak.com'
-EMAIL_HOST_PASSWORD = '230296s2'
+EMAIL_HOST = 'emailHost
+EMAIL_HOST_USER = 'emailUser'
+EMAIL_HOST_PASSWORD = 'emailPasswd'
 EMAIL_PORT = 2525
 EMAIL_USE_TLS = False
 
